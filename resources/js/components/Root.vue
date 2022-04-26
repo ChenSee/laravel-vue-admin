@@ -53,10 +53,19 @@
                   <span slot="title">{{ menu.title }}</span>
                 </template>
                 <template v-for="children in menu.children">
-                  <MenuItem :menu="children" :key="children.id" :is_collapsed="isCollapsed" />
+                  <MenuItem
+                    :menu="children"
+                    :key="children.id"
+                    :is_collapsed="isCollapsed"
+                  />
                 </template>
               </el-submenu>
-              <el-menu-item :index="menu.route" :key="menu.id" :route="menu.route" v-else>
+              <el-menu-item
+                :index="menu.route"
+                :key="menu.id"
+                :route="menu.route"
+                v-else
+              >
                 <i :class="menu.icon" v-if="menu.icon" size="16"></i>
                 <span slot="title">{{ menu.title }}</span>
               </el-menu-item>
@@ -82,13 +91,22 @@
         >
           <div class="layout-header-l">
             <div class="layout-header-trigger hover" @click="collapsedSide">
-              <i class="el-icon-s-fold fs-20 menu-icon" :class="{ 'rotate-icon': isCollapsed }" />
+              <i
+                class="el-icon-s-fold fs-20 menu-icon"
+                :class="{ 'rotate-icon': isCollapsed }"
+              />
             </div>
             <div class="layout-header-breadcrumb">
               <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/' }"
+                  >首页</el-breadcrumb-item
+                >
                 <template v-for="menu in pageData.menuList">
-                  <el-breadcrumb-item v-if="menu.route == route" :key="menu.route">{{ menu.title }}</el-breadcrumb-item>
+                  <el-breadcrumb-item
+                    v-if="menu.route == route"
+                    :key="menu.route"
+                    >{{ menu.title }}</el-breadcrumb-item
+                  >
                 </template>
               </el-breadcrumb>
             </div>
@@ -108,9 +126,7 @@
                 <div class="layout-header-user">
                   <el-avatar :src="pageData.user.avatar" :size="25" />
                   <span class="layout-header-user-name">
-                    {{
-                    pageData.user.name
-                    }}
+                    {{ pageData.user.name }}
                   </span>
                 </div>
                 <el-dropdown-menu slot="dropdown">
@@ -131,9 +147,17 @@
             </div>
           </div>
         </el-header>
-        <el-main :class="{ 'el-main-fixed': fixedHeader }" ref="mainView">
+
+        <el-main
+          :class="{ 'el-main-fixed': fixedHeader }"
+          class="hasTagsView"
+          ref="mainView"
+        >
+          <tags-view :menu="pageData.menu" v-if="pageData.menu" />
           <div class="layout-content-main">
-            <router-view></router-view>
+            <keep-alive :include="cachedViews">
+              <router-view :key="key"></router-view>
+            </keep-alive>
           </div>
         </el-main>
         <el-footer class="admin-footer" height="auto">
@@ -146,7 +170,8 @@
                 :href="item.href"
                 target="_blank"
                 :underline="false"
-              >{{ item.title }}</el-link>
+                >{{ item.title }}</el-link
+              >
             </div>
             <div v-html="pageData.copyright"></div>
           </div>
@@ -155,20 +180,28 @@
     </el-container>
     <el-backtop></el-backtop>
     <el-drawer :visible.sync="showAdminSet" size="250px">
-      <div style="padding:0 10px;">
+      <div style="padding: 0 10px">
         <el-divider>主题风格</el-divider>
         <div>
           <el-badge type="success" is-dot :hidden="isDark">
             <div>
               <el-tooltip content="亮色菜单风格" placement="top">
-                <img @click="isDark = false" class="hover" src="../assets/menu-light.svg" />
+                <img
+                  @click="isDark = false"
+                  class="hover"
+                  src="../assets/menu-light.svg"
+                />
               </el-tooltip>
             </div>
           </el-badge>
           <el-badge type="success" is-dot :hidden="!isDark">
             <div class="ml-20">
               <el-tooltip content="暗色菜单风格" placement="top">
-                <img @click="isDark = true" class="hover" src="../assets/menu-dark.svg" />
+                <img
+                  @click="isDark = true"
+                  class="hover"
+                  src="../assets/menu-dark.svg"
+                />
               </el-tooltip>
             </div>
           </el-badge>
@@ -211,12 +244,14 @@
 
 <script>
 import { flattenDeepChild } from "../utils";
+import TagsView from "./TagsView";
 
 export default {
+  components: { TagsView },
   props: {
     pageData: Object,
   },
-  data() {
+  data () {
     return {
       fixedSide: localStorage.getItem("fixedSide")
         ? localStorage.getItem("fixedSide") == "true"
@@ -238,7 +273,7 @@ export default {
       query: {},
     };
   },
-  mounted() {
+  mounted () {
     //监听路由变动
     this.$bus.on("route-after", (to) => {
       this.route = to.path;
@@ -265,48 +300,54 @@ export default {
       this.$message[type](message);
     });
     this.$nextTick(() => {
-      window.rootFooterHeight = this.$refs.rootFooter.offsetHeight +20;
+      window.rootFooterHeight = this.$refs.rootFooter.offsetHeight + 20;
     });
   },
-  destroyed() {
+  destroyed () {
     this.$bus.off("route-after");
     this.$bus.off("message");
   },
   computed: {
-    menuitemClasses() {
+    menuitemClasses () {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
-    menuRoutes() {
+    menuRoutes () {
       return flattenDeepChild(this.pageData.menu, "children", "route");
     },
   },
   methods: {
-    pageReload() {
+    cachedViews () {
+      return this.$store.state.tagsView.cachedViews
+    },
+    key () {
+      return this.$route.path
+    },
+    pageReload () {
       this.$bus.emit("pageReload");
     },
-    collapsedSide() {
+    collapsedSide () {
       this.isCollapsed = !this.isCollapsed;
     },
-    onLogout() {
+    onLogout () {
       this.$confirm("您确定退出登录当前账户吗？", "退出登陆确认").then(() => {
         window.location.href = this.pageData.url.logout;
       });
     },
   },
   watch: {
-    fixedSide(val) {
+    fixedSide (val) {
       localStorage.setItem("fixedSide", val);
     },
-    fixedHeader(val) {
+    fixedHeader (val) {
       localStorage.setItem("fixedHeader", val);
     },
-    isCollapsed(val) {
+    isCollapsed (val) {
       localStorage.setItem("isCollapsed", val);
     },
-    isDark(val) {
+    isDark (val) {
       localStorage.setItem("isDark", val);
     },
-    isDarkHeader(val) {
+    isDarkHeader (val) {
       localStorage.setItem("isDarkHeader", val);
     },
   },

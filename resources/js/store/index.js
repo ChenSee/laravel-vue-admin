@@ -1,66 +1,68 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import getters from './getters'
-import app from './modules/app'
-import settings from './modules/settings'
+import Vue from "vue";
+import Vuex from "vuex";
+import getters from "./getters";
+import app from "./modules/app";
+import settings from "./modules/settings";
+import tagsView from "./modules/tagsView";
 
 Vue.use(Vuex);
 
-import http from '@/util/axios'
+import http from "@/util/axios";
 
 const store = new Vuex.Store({
-    strict: false,
-    modules: {
-        app,
-        settings
+  strict: false,
+  modules: {
+    app,
+    settings,
+    tagsView,
+  },
+  state: {
+    query: "",
+    path: null,
+    pages: {},
+    contents: {},
+    grids: {},
+  },
+  getters: {
+    ...getters,
+    thisPage: (state) => {
+      return state.pages[state.path];
     },
-    state: {
-        query: "",
-        path: null,
-        pages: {},
-        contents: {},
-        grids: {}
+  },
+  mutations: {
+    setPath(state, path) {
+      state.path = path;
     },
-    getters: {
-        ...getters,
-        thisPage: state => {
-            return state.pages[state.path]
-        }
+    initPages(state, path) {
+      state.pages[path] = {
+        grids: {},
+      };
     },
-    mutations: {
-        setPath(state, path) {
-            state.path = path;
-        },
-        initPages(state, path) {
-            state.pages[path] = {
-                grids: {
-                }
-            }
-        },
-        registerCentent(state, path) {
-            state.contents[path] = {}
-        },
-        setCenten(state, { data, path }) {
-            state.contents[path] = data
-        },
-        setGridData(state, { key, data }) {
-            state.pages[state.path].grids[key] = data;
-        }
+    registerCentent(state, path) {
+      state.contents[path] = {};
     },
-    actions: {
-        getCenten(context, { path, contentUrl, params }) {
+    setCenten(state, { data, path }) {
+      state.contents[path] = data;
+    },
+    setGridData(state, { key, data }) {
+      state.pages[state.path].grids[key] = data;
+    },
+  },
+  actions: {
+    getCenten(context, { path, contentUrl, params }) {
+      return http
+        .get(contentUrl, {
+          params: params,
+        })
+        .then((data) => {
+          context.commit("setCenten", { data: data, path: path });
+          return Promise.resolve(data);
+        })
+        .catch(() => {
+          return Promise.reject();
+        });
+    },
+  },
+});
 
-            return http.get(contentUrl, {
-                params: params
-            }).then(data => {
-                context.commit('setCenten', { data: data, path: path });
-                return Promise.resolve(data)
-            }).catch(() => {
-                return Promise.reject()
-            });
-
-        }
-    }
-})
-
-export default store
+export default store;
