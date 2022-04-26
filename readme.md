@@ -17,7 +17,7 @@ Laravel-Vue-Admin 是一个开箱即用的 Laravel 后台扩展
 首先确保安装好了 laravel，并且数据库连接设置正确。
 
 ```bash
-composer require smallruraldog/laravel-vue-admin
+composer require chen-see/laravel-vue-admin
 ```
 
 然后运行下面的命令来发布资源：
@@ -40,19 +40,19 @@ php artisan admin:install
 查看当前版本
 
 ```bash
-composer show smallruraldog/laravel-vue-admin --latest
+composer show chen-see/laravel-vue-admin --latest
 ```
 
 更新到最新版
 
 ```bash
-composer require smallruraldog/laravel-vue-admin
+composer require chen-see/laravel-vue-admin
 ```
 
 更新到开发版
 
 ```bash
-composer require smallruraldog/laravel-vue-admin:dev-master
+composer require chen-see/laravel-vue-admin:dev-master
 ```
 
 更新资源文件
