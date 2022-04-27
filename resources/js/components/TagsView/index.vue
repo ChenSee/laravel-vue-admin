@@ -18,7 +18,7 @@
         @contextmenu.prevent.native="openMenu(tag, $event)"
       >
         <!-- {{ tag.title }} -->
-        {{ getTitle(tag.path) }}
+        {{ getView(tag.path).title }}
         <span
           v-if="!isAffix(tag)"
           class="el-icon-close"
@@ -86,14 +86,8 @@ export default {
     this.addTags()
   },
   methods: {
-    getTitle (path) {
-      let title
-      let childrenTitle
-      title = this.menu.find(v => {
-        if (v.children) childrenTitle = v.children.find(v => v.route == path)
-        return v.route == path
-      })
-      return title ? title.title : childrenTitle.title
+    getView (path) {
+      return this.menu.find(v => v.route == path)
     },
     isActive (route) {
       return route.path === this.$route.path
@@ -130,6 +124,13 @@ export default {
           this.$store.dispatch('tagsView/addVisitedView', tag)
         }
       }
+      // console.log(this.menu, this.$route)
+      this.$store.dispatch('tagsView/addView', {
+        fullPath: '/home',
+        path: '/home',
+        name: 'home',
+        meta: {}
+      })
     },
     addTags () {
       const { name } = this.$route

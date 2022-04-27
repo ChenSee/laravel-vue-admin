@@ -153,7 +153,7 @@
           class="hasTagsView"
           ref="mainView"
         >
-          <tags-view :menu="pageData.menu" v-if="pageData.menu" />
+          <tags-view :menu="pageData.menuList" v-if="pageData.menuList" />
           <div class="layout-content-main">
             <keep-alive :include="cachedViews">
               <router-view :key="key"></router-view>
