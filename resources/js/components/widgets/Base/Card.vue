@@ -6,7 +6,7 @@
     :body-style="attrs.bodyStyle"
     :shadow="attrs.shadow"
   >
-    <div slot="header" class="clearfix">
+    <div slot="header" class="clearfix" v-if="attrs.header">
       <component
         v-if="attrs.header"
         :is="attrs.header.componentName"
