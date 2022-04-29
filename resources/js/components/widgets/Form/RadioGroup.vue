@@ -16,7 +16,9 @@
       :disabled="radio.disabled"
       :border="radio.border"
       :size="radio.size"
-    >{{ radio.title }}</el-radio>
+    >
+      {{ radio.title }}
+    </el-radio-button>
     <el-radio
       v-if="!radio.isButton"
       v-for="(radio, index) in attrs.options"
@@ -27,7 +29,9 @@
       :disabled="radio.disabled"
       :border="radio.border"
       :size="radio.size"
-    >{{ radio.title }}</el-radio>
+    >
+      {{ radio.title }}
+    </el-radio>
   </el-radio-group>
 </template>
 <script>
