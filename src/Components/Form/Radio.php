@@ -16,6 +16,7 @@ class Radio extends Component
     protected $label;
     protected $disabled = false;
     protected $border = false;
+    protected $isButton = false;
     /**
      * @var string
      */
@@ -94,4 +95,9 @@ class Radio extends Component
         return $this;
     }
 
+    public function button()
+    {
+        $this->isButton = true;
+        return $this;
+    }
 }

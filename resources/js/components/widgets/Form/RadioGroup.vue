@@ -6,7 +6,19 @@
     :disabled="attrs.disabled"
     @change="onChange"
   >
+    <el-radio-button
+      v-if="radio.isButton"
+      v-for="(radio, index) in attrs.options"
+      :style="radio.style"
+      :class="radio.className"
+      :key="index"
+      :label="radio.label"
+      :disabled="radio.disabled"
+      :border="radio.border"
+      :size="radio.size"
+    >{{ radio.title }}</el-radio>
     <el-radio
+      v-if="!radio.isButton"
       v-for="(radio, index) in attrs.options"
       :style="radio.style"
       :class="radio.className"
@@ -22,13 +34,13 @@
 import { FormItemComponent } from "@/mixins.js";
 export default {
   mixins: [FormItemComponent],
-  data() {
+  data () {
     return {
       vm: this._.clone(this.value)
     };
   },
   watch: {
-    value(value) {
+    value (value) {
       this.vm = value;
     }
   }
