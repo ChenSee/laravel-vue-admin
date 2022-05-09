@@ -549,13 +549,13 @@ $header-bar-height: 55px;
 }
 .el-main {
   padding: 0;
+  margin-top: 90px;
 }
 .el-main-fixed {
   margin-top: $header-bar-height;
 }
 .layout-content-main {
   margin: 0px;
-  margin-top: 34px;
 
   .layout-page-header {
     margin: -15px -15px 0;
