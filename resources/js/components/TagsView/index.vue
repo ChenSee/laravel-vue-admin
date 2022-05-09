@@ -133,7 +133,7 @@ export default {
       })
     },
     addTags () {
-      const { name } = this.$route
+      const { path, name } = this.$route
       if (name && path != '/' && this.getView(path)) {
         this.$store.dispatch('tagsView/addView', this.$route)
       }
