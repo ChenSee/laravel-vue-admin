@@ -549,10 +549,10 @@ $header-bar-height: 55px;
 }
 .el-main {
   padding: 0;
-  margin-top: 90px;
 }
 .el-main-fixed {
-  margin-top: $header-bar-height;
+  // margin-top: $header-bar-height;
+  margin-top: 90px;
 }
 .layout-content-main {
   margin: 0px;
