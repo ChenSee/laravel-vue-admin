@@ -9,7 +9,7 @@
       <router-link
         v-for="tag in visitedViews"
         ref="tag"
-        :key="tag.path"
+        :key="tag.path == '/' ? '/home' : tag.path"
         :class="isActive(tag) ? 'active' : ''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         tag="span"
@@ -126,15 +126,15 @@ export default {
       }
       // console.log(this.menu, this.$route)
       this.$store.dispatch('tagsView/addView', {
-        fullPath: '/home',
-        path: '/home',
+        fullPath: '/',
+        path: '/',
         name: 'home',
-        meta: {}
+        meta: { affix: true }
       })
     },
     addTags () {
       const { name } = this.$route
-      if (name) {
+      if (name && path != '/') {
         this.$store.dispatch('tagsView/addView', this.$route)
       }
       return false
@@ -234,6 +234,8 @@ export default {
   background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  position: fixed;
+  z-index: 100;
   .tags-view-wrapper {
     .tags-view-item {
       display: inline-block;

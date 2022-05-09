@@ -155,8 +155,8 @@
         >
           <tags-view :menu="pageData.menuList" v-if="pageData.menuList" />
           <div class="layout-content-main">
-            <keep-alive :include="cachedViews">
-              <router-view :key="key"></router-view>
+            <keep-alive :include="cachedViews()">
+              <router-view :key="key()"></router-view>
             </keep-alive>
           </div>
         </el-main>
@@ -555,6 +555,7 @@ $header-bar-height: 55px;
 }
 .layout-content-main {
   margin: 0px;
+  margin-top: 34px;
 
   .layout-page-header {
     margin: -15px -15px 0;
