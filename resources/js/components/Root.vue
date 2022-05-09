@@ -264,10 +264,10 @@ export default {
         : false,
       isDark: localStorage.getItem("isDark")
         ? localStorage.getItem("isDark") == "true"
-        : true,
+        : false,
       isDarkHeader: localStorage.getItem("isDarkHeader")
         ? localStorage.getItem("isDarkHeader") == "true"
-        : true,
+        : false,
       showAdminSet: false,
       route: "/",
       query: {},
