@@ -1,9 +1,5 @@
 <template>
-  <el-popconfirm
-    placement="top"
-    :title="action.message"
-    @onConfirm="onHandle"
-  >
+  <el-popconfirm placement="top" :title="action.message" @confirm="onHandle">
     <el-button
       slot="reference"
       :type="action.type"
@@ -16,7 +12,7 @@
       :autofocus="action.autofocus"
       :loading="loading"
       class="action-button"
-      >{{action.content}}</el-button
+      >{{ action.content }}</el-button
     >
   </el-popconfirm>
 </template>
@@ -27,13 +23,13 @@ export default {
     action: Object,
     key_name: String
   },
-  data() {
+  data () {
     return {
       loading: false
     };
   },
   methods: {
-    onHandle() {
+    onHandle () {
       this.loading = true;
       this.$http
         .delete(this.action.resource + "/" + this.key)
@@ -46,13 +42,13 @@ export default {
     }
   },
   computed: {
-    colum() {
+    colum () {
       return this.scope.colum;
     },
-    row() {
+    row () {
       return this.scope.row;
     },
-    key() {
+    key () {
       return this.scope.row[this.key_name];
     }
   }

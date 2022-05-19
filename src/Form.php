@@ -223,7 +223,6 @@ class Form extends Component
             Arr::set($this->formItemsValue, $item->getProp(), $item->getDefaultValue());
             Arr::set($this->formRules, $item->getProp(), $item->getRules());
         }
-
     }
 
     /**
@@ -490,7 +489,8 @@ class Form extends Component
             if (Str::contains($column, '.')) {
                 list($relation) = explode('.', $column);
 
-                if (method_exists($this->model, $relation) &&
+                if (
+                    method_exists($this->model, $relation) &&
                     $this->model->$relation() instanceof Relation
                 ) {
 
@@ -668,7 +668,6 @@ class Form extends Component
                     $relation->delete();
                     break;
             }
-
         }
     }
 
@@ -760,7 +759,8 @@ class Form extends Component
                         $relation = $this->model()->$name();
 
                         $keyName = $relation->getRelated()->getKeyName();
-
+                        $foreignKeyMethod = version_compare(app()->version(), '5.8.0', '<') ? 'getForeignKey' : 'getForeignKeyName';
+                        $related[$relation->{$foreignKeyMethod}()] = $this->model->id;
                         $instance = $relation->findOrNew(Arr::get($related, $keyName));
 
                         //处理已删除的关联
@@ -771,14 +771,12 @@ class Form extends Component
                             }
                             Arr::forget($related, static::REMOVE_FLAG_NAME);
                         } catch (\Exception $exception) {
-
                         }
                         //过滤不存在的字段
                         foreach ($related as $key => $value) {
                             if (\Schema::hasColumn($instance->getTable(), $key)) {
                                 $instance->setAttribute($key, $value);
                             }
-
                         }
                         $instance->save();
                     }
@@ -834,7 +832,6 @@ class Form extends Component
             'code' => 200,
             'data' => $this->editData,
         ];
-
     }
 
     /**
@@ -880,7 +877,6 @@ class Form extends Component
             'bottom' => $this->bottom,
             'actions' => $this->actions->builderActions()
         ];
-
     }
 
     public function __get($name)

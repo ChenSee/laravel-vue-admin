@@ -3,7 +3,7 @@
     <el-popconfirm
       placement="top"
       :title="action.message"
-      @onConfirm="onClick"
+      @confirm="onClick"
       v-if="action.message"
     >
       <el-button
@@ -20,7 +20,12 @@
         >{{ action.content }}</el-button
       >
     </el-popconfirm>
-    <el-tooltip :content="action.tooltip" placement="top" :disabled="!action.tooltip" v-else>
+    <el-tooltip
+      :content="action.tooltip"
+      placement="top"
+      :disabled="!action.tooltip"
+      v-else
+    >
       <el-button
         :type="action.type"
         :size="action.size"
@@ -67,22 +72,22 @@ export default {
     action: Object, //当前主键的属性
     key_name: String //主键名称
   },
-  data() {
+  data () {
     return {
       loading: false,
       dialogTableVisible: false
     };
   },
-  mounted() {
+  mounted () {
     this.$bus.on("closeDialog", data => {
       this.dialogTableVisible = false;
     });
   },
-  destroyed() {
+  destroyed () {
     this.$bus.off("closeDialog");
   },
   methods: {
-    onClick() {
+    onClick () {
       if (this.action.dialog) {
         this.dialogTableVisible = true;
         return;
@@ -103,7 +108,7 @@ export default {
           break;
       }
     },
-    onRequest(uri) {
+    onRequest (uri) {
       this.loading = true;
       this.$http
         .get(uri)
@@ -117,7 +122,7 @@ export default {
     }
   },
   computed: {
-    uri() {
+    uri () {
       //替换变量
       let uri = this.action.uri;
       this._.forEach(this.row, (value, key) => {
@@ -126,15 +131,15 @@ export default {
       return uri;
     },
     //当前表格/树形表格的字段定义
-    colum() {
+    colum () {
       return this.scope.colum;
     },
     //当前行的值
-    row() {
+    row () {
       return this.scope.row;
     },
     //主键值
-    key() {
+    key () {
       return this.scope.row[this.key_name];
     }
   }
