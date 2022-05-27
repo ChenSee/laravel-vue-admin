@@ -45,6 +45,7 @@ class Form extends Component
     protected $formItemLayout = [];
     protected $ignoreEmptyProps = [];
     protected $tabPosition = "top";
+    protected $tabDefaultName = null;
 
 
     const MODE_EDIT = 'edit';
@@ -183,6 +184,17 @@ class Form extends Component
     public function tabPosition($tabPosition)
     {
         $this->tabPosition = $tabPosition;
+        return $this;
+    }
+
+    /**
+     * tab默认选项卡
+     * @param $tabDefaultName
+     * @return $this
+     */
+    public function tabDefaultName($tabDefaultName)
+    {
+        $this->tabDefaultName = $tabDefaultName;
         return $this;
     }
 
