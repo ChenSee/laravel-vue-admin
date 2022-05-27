@@ -33,7 +33,29 @@
         <component
           :is="attrs.attrs.hideTab ? 'div' : 'el-tabs'"
           :tab-position="attrs.tabPosition"
+          v-if="attrs.tabDefaultName"
           :value="attrs.tabDefaultName"
+        >
+          <component
+            :is="attrs.attrs.hideTab ? 'div' : 'el-tab-pane'"
+            :label="tab.name"
+            :name="tab.name"
+            v-for="tab in attrs.formItemLayout"
+            :key="tab.name"
+          >
+            <component
+              v-for="(row, index) in tab.rows"
+              :key="index"
+              :is="row.componentName"
+              :attrs="row"
+              :form-data="formData"
+            />
+          </component>
+        </component>
+        <component
+          :is="attrs.attrs.hideTab ? 'div' : 'el-tabs'"
+          :tab-position="attrs.tabPosition"
+          v-else
         >
           <component
             :is="attrs.attrs.hideTab ? 'div' : 'el-tab-pane'"
