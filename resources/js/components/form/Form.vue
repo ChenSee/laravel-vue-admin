@@ -38,6 +38,7 @@
           <component
             :is="attrs.attrs.hideTab ? 'div' : 'el-tab-pane'"
             :label="tab.name"
+            :name="tab.name"
             v-for="tab in attrs.formItemLayout"
             :key="tab.name"
           >
