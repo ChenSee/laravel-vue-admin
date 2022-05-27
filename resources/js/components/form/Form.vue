@@ -33,7 +33,7 @@
         <component
           :is="attrs.attrs.hideTab ? 'div' : 'el-tabs'"
           :tab-position="attrs.tabPosition"
-          :value="attrs.tabDefaultName"
+          v-model="attrs.tabDefaultName"
         >
           <component
             :is="attrs.attrs.hideTab ? 'div' : 'el-tab-pane'"
