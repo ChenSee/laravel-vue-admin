@@ -880,7 +880,7 @@ class Form extends Component
             'ignoreEmptyProps' => $this->ignoreEmptyProps,
             'formItemLayout' => $this->formItemLayout,
             'tabPosition' => $this->tabPosition,
-            'tabDefaultName' => $this->tabDefaultName,
+            'tabDefaultName' => $this->tabDefaultName ?? $this->formItemLayout[0]['name'],
             'defaultValues' => (object)$this->formItemsValue,
             'formRules' => (object)$this->formRules,
             'ref' => $this->ref,
