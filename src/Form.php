@@ -726,6 +726,9 @@ class Form extends Component
                         $related->setAttribute($column, $value);
                     }
 
+                    $foreignKeyMethod = version_compare(app()->version(), '5.8.0', '<') ? 'getForeignKey' : 'getForeignKeyName';
+                    $related[$relation->{$foreignKeyMethod}()] = $this->model->id;
+
                     $related->save();
                     break;
                 case $relation instanceof Relations\BelongsTo:
