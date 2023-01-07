@@ -335,6 +335,9 @@ export default {
     },
   },
   watch: {
+    $route(to, from){
+      this.route = to.path;
+    },
     fixedSide (val) {
       localStorage.setItem("fixedSide", val);
     },
