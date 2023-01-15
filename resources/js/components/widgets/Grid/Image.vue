@@ -37,6 +37,14 @@ export default {
         return [getFileUrl(this.attrs.host, this.columnValue || this.attrs.src)];
       }
     }
+  },
+  watch: {
+    value () {
+      this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
+    },
+    "attrs.src" () {
+      this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
+    }
   }
 };
 </script>
