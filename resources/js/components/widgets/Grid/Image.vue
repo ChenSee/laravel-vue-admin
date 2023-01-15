@@ -24,9 +24,9 @@ export default {
     this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
   },
   computed: {
-    // src () {
-    //   return getFileUrl(this.attrs.host, this.value || this.attrs.src);
-    // },
+    src () {
+      return getFileUrl(this.attrs.host, this.value || this.attrs.src);
+    },
     previewSrcList () {
       if (!this.attrs.preview) return [];
       if (this._.isArray(this.columnValue || this.attrs.src)) {
