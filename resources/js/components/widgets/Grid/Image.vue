@@ -15,14 +15,7 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      src: ""
-    }
-  },
-  mounted () {
-    this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
-  },
+  mounted () {},
   computed: {
     src () {
       return getFileUrl(this.attrs.host, this.value || this.attrs.src);
@@ -36,14 +29,6 @@ export default {
       } else {
         return [getFileUrl(this.attrs.host, this.columnValue || this.attrs.src)];
       }
-    }
-  },
-  watch: {
-    value () {
-      this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
-    },
-    "attrs.src" () {
-      this.src = getFileUrl(this.attrs.host, this.value || this.attrs.src);
     }
   }
 };
