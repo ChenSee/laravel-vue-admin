@@ -264,7 +264,7 @@ export default {
         : false,
       isDark: localStorage.getItem("isDark")
         ? localStorage.getItem("isDark") == "true"
-        : false,
+        : true,
       isDarkHeader: localStorage.getItem("isDarkHeader")
         ? localStorage.getItem("isDarkHeader") == "true"
         : false,
