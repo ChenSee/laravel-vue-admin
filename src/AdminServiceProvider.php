@@ -51,7 +51,7 @@ class AdminServiceProvider extends ServiceProvider
         if (file_exists($routes = admin_path('routes.php'))) {
             $this->loadRoutesFrom($routes);
         }
-
+        if (config('admin.https')) URL::forceScheme('https');
         $this->registerPublishing();
     }
 
@@ -69,8 +69,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerRouteMiddleware();
 
         $this->commands($this->commands);
-
-
     }
 
 
@@ -102,6 +100,4 @@ class AdminServiceProvider extends ServiceProvider
             app('router')->middlewareGroup($key, $middleware);
         }
     }
-
-
 }
