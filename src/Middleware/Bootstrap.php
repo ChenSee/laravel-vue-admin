@@ -10,6 +10,7 @@ class Bootstrap
 {
     public function handle(Request $request, Closure $next)
     {
+        if (config('admin.https')) \URL::forceScheme('https');
         Admin::bootstrap();
 
         return $next($request);
