@@ -107,15 +107,32 @@ export default {
     },
     onRequest(uri) {
       this.loading = true;
-      this.$http
-        .get(uri)
+      this.beforeEmit();
+      this.$http[this.attrs.requestMethod](uri)
         .then((res) => {
           if (res.code == 200) {
+            this.successEmit();
           }
         })
         .finally(() => {
           this.loading = false;
+          this.afterEmit();
         });
+    },
+    beforeEmit() {
+      this.attrs.beforeEmit.map((item) => {
+        this.$bus.emit(item.eventName, item.eventData);
+      });
+    },
+    afterEmit() {
+      this.attrs.afterEmit.map((item) => {
+        this.$bus.emit(item.eventName, item.eventData);
+      });
+    },
+    successEmit() {
+      this.attrs.successEmit.map((item) => {
+        this.$bus.emit(item.eventName, item.eventData);
+      });
     },
   },
 };
