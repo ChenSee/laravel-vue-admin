@@ -79,12 +79,12 @@ export default {
     };
   },
   mounted () {
-    this.$bus.on(this.attrs.busClose, data => {
+    this.$bus.on(this.action.busClose, data => {
       this.dialogTableVisible = false;
     });
   },
   destroyed () {
-    this.$bus.off(this.attrs.busClose);
+    this.$bus.off(this.action.busClose);
   },
   methods: {
     onClick () {
