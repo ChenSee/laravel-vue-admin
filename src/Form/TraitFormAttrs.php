@@ -17,6 +17,12 @@ trait TraitFormAttrs
         return $this;
     }
 
+    public function busClose($closeDialog)
+    {
+        $this->attrs->busClose = $closeDialog;
+        return $this;
+    }
+
     public function style($style)
     {
         $this->attrs->style = $style;

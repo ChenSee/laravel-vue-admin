@@ -284,7 +284,7 @@ export default {
       this.attrs.attrs.isDialog ? this.closeDialog() : this.$router.go(-1);
     },
     closeDialog () {
-      this.$bus.emit("showDialogGridFrom", { isShow: false });
+      this.$bus.emit(this.attrs.attrs.busClose, { isShow: false });
     },
   },
 };

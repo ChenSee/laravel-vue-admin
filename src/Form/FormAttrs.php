@@ -20,6 +20,7 @@ class FormAttrs
     public $validateOnRuleChange = true;
     public $size;
     public $disabled = false;
+    public $busClose = "showDialogGridFrom";
 
     public $hideTab = true;
 
