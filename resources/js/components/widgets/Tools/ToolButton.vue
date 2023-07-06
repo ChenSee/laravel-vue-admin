@@ -77,12 +77,12 @@ export default {
     };
   },
   mounted() {
-    this.$bus.on("closeDialog", (data) => {
+    this.$bus.on(this.attrs.busClose, (data) => {
       this.dialogTableVisible = false;
     });
   },
   destroyed() {
-    this.$bus.off("closeDialog");
+    this.$bus.off(this.attrs.busClose);
   },
   methods: {
     onClick() {

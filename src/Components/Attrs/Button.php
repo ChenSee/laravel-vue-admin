@@ -5,6 +5,7 @@ namespace SmallRuralDog\Admin\Components\Attrs;
 trait Button
 {
     protected $content;
+    protected $busClose = "closeDialog";
     protected $size;
     protected $type = "primary";
     protected $plain = false;
@@ -13,6 +14,16 @@ trait Button
     protected $disabled = false;
     protected $icon;
     protected $autofocus = false;
+
+    /**
+     * @param mixed $closeDialog
+     * @return $this
+     */
+    public function busClose($closeDialog)
+    {
+        $this->busClose = $closeDialog;
+        return $this;
+    }
 
     /**
      * @param mixed $content
