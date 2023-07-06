@@ -292,7 +292,7 @@ export default {
 <style lang="scss">
 .form-page {
   .form-card {
-    min-height: 200px;
+    // min-height: 200px;
   }
 
   .form-bottom-actions {
