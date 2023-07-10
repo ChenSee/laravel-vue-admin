@@ -18,6 +18,9 @@ export default {
       ...this.attrs.config
     });
     this.antv.render();
+    this.$bus.on(this.attrs.busName, (data) => {
+      this.antv.changeData(data);
+    });
   },
   updated() {
     this.antv.changeData(this.attrs.data);

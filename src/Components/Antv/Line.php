@@ -10,6 +10,7 @@ class Line extends Component
     protected $componentName = "AntvLine";
     protected $canvasId;
 
+    protected $busName = "antv";
     protected $data;
     protected $config;
 
@@ -42,6 +43,17 @@ class Line extends Component
     }
 
     /**
+     * 设置bus
+     * @param mixed $name
+     * @return $this
+     */
+    public function bus($name)
+    {
+        $this->busName = $name;
+        return $this;
+    }
+
+    /**
      * 设置配置信息
      * @param mixed $config
      * @return $this
@@ -56,6 +68,4 @@ class Line extends Component
 
         return $this;
     }
-
-
 }
