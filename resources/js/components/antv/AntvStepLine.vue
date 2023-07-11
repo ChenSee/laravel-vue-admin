@@ -27,6 +27,7 @@ export default {
   },
   destroyed() {
     //this.antv.destory();
+    this.$bus.off(this.attrs.busName);
   }
 };
 </script>
