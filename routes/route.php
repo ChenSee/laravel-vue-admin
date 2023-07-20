@@ -27,7 +27,7 @@ Route::group([
 
     $router->group(['middleware' => config('admin.route.middleware')], function (Router $router) {
         $router->resource('auth/users', 'UserController')->names('admin.auth.users');
-        $router->get('auth/setting', 'SettingController@index')->name('admin.auth.setting');
+        $router->get('auth/setting', 'SettingController@index')->name('admin.setting');
         $router->put('auth/setting', 'SettingController@editUpdate');
         $router->resource('auth/roles', 'RoleController')->names('admin.auth.roles');
         $router->resource('auth/permissions', 'PermissionController')->names('admin.auth.permissions');
