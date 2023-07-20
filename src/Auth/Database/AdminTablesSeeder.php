@@ -81,6 +81,13 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'parent_id' => 0,
+                'order' => 1,
+                'title' => '个人信息',
+                'icon' => 'el-icon-setting',
+                'uri' => '/auth/setting',
+            ],
+            [
+                'parent_id' => 0,
                 'order' => 2,
                 'title' => '系统',
                 'icon' => 'el-icon-setting',

@@ -22,6 +22,7 @@ class AdminServiceProvider extends ServiceProvider
         'admin.permission' => Middleware\Permission::class,
         'admin.bootstrap' => Middleware\Bootstrap::class,
         'admin.session' => Middleware\Session::class,
+        'admin.authSession' => Middleware\AuthenticateSession::class,
     ];
 
     /**
@@ -32,6 +33,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
+            'admin.authSession',
             'admin.log',
             'admin.bootstrap',
             'admin.permission'
