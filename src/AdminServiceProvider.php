@@ -32,8 +32,8 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $middlewareGroups = [
         'admin' => [
-            'admin.auth',
             'admin.authSession',
+            'admin.auth',
             'admin.log',
             'admin.bootstrap',
             'admin.permission'
