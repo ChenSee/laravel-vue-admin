@@ -88,7 +88,7 @@ class Menu extends Model
     {
         $connection = config('admin.database.connection') ?: config('database.default');
         $orderColumn = DB::connection($connection)->getQueryGrammar()->wrap($this->orderColumn);
-        $byOrder = 'id ASC,' . $orderColumn;
+        $byOrder = $orderColumn . ', id ASC';
         $query = static::query();
         if (config('admin.check_menu_roles') !== false) {
             $query->with('roles:id,name,slug');
